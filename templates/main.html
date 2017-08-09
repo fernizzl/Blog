@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Bellefair|Lora" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bellefair" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/buttons.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="/static/js/jquery.editable.js"></script>
+  <script src="/static/js/moment.js"></script>
+  <script src="/static/js/moment-timezone.js"></script>
+  <script src="/static/js/main.js"></script>
+  
+
+	{{ moment.include_moment() }}
+
+ </head>
+
+<title> Fernizzle's Blog </title>
+
+<body>
+
+	<iframe src="https://giphy.com/embed/NpbSrGmtQmLEA" width="200" height="200" frameBorder="0" class="giphy-embed"  allowFullScreen></iframe><p>
+	<a href="https://giphy.com/gifs/cat-harry-potter-pusheen-NpbSrGmtQmLEA"></a></p>
+	<fieldset>
+	<form id = "entries">
+		<p> Welcome to my blog! This blog is dedicated to random thoughts and cute miscellaneous stuff. </p> 
+		<p> Oh, and lots of gifs and pics!</p>
+		<input type = "text" id="entry" >
+		<input type = "submit"  value= "Submit entry!" id="submit" >
+	</form>
+	</fieldset>
+
+	<div id = "message"> </div>
+	<table id="table" class= "center">
+	<tr> 
+    	<th class = "entry"> Entry </th>
+    	<th id= "created_at" > Created <br> at </th>
+    	<th id= "updated_at"  > Updated <br> at </th>
+   	</tr>
+
+    {% for entry in entries %}
+
+        <tr id={{entry.id}} class= "entry" > 
+        <td class= "editable"> {{entry.entry}} </td>
+		<td>
+        {% if entry.image_url != None %}
+        <img id="img{{entry.id}}" src= "{{entry.image_url}}" width=275px height = 175px/> 
+
+        {% else %}
+        <img id= "img{{entry.id}}" style= "display: none" width=275px height = 175px/>
+        {% endif %} 
+        </td>
+
+        <!-- <label class= "file_button"> -->
+        <td><label class="button button-glow button-rounded button-caution button-small file_button"><input type= "file"/>Upload</label></td>
+	    <td> <button type= "button" class="button button-glow button-rounded button-caution button-small file_button delete" value= "delete"> Delete </button> </td> 
+		<td> <button type="button" value = "edit" class ="button button-glow button-rounded button-caution button-small file_button button_edit"> Edit</button> </td> 
+        
+        
+        <td type= "text" class= "created"> {{entry.created_at}} </td>
+        <td type= "text" class= "updated"> {{entry.updated_at}} </td>
+
+        </tr> 
+
+	{% endfor %}
+	</table>
+
+</body>
+</html>
